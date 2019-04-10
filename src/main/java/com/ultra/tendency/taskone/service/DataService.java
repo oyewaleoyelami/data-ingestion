@@ -33,43 +33,46 @@ public class DataService {
         this.dataProducer = dataProducer;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 1000)
     public void simulateDevice() throws JsonProcessingException {
         long timestamp = Instant.now().getEpochSecond();
 
-        //using the faker library to generate fake data
-        Faker faker = new Faker();
+        //first device
+        pushData(generateSimulatedData(timestamp, firstDevice));
 
-        int temperature = faker.number().numberBetween(0,100);
+        //second device
+        pushData(generateSimulatedData(timestamp, secondDevice));
+
+        //third device
+        pushData(generateSimulatedData(timestamp, thirdDevice));
+    }
+
+    // push to kafka
+    private void pushData(IotData deviceData) throws JsonProcessingException {
+        String dataObject = mapper.writeValueAsString(DeviceData.builder().data(deviceData).build());
+        dataProducer.sendMessage(dataObject);
+    }
+
+    private IotData generateSimulatedData(long timestamp, UUID deviceId) {
+        //using the faker library to generate simulated data for the three devices
+        Faker faker = new Faker();
+        int temperature = faker.number().numberBetween(0, 100);
         String fakeLongitude = faker.address().longitude();
         String fakeLatitude = faker.address().latitude();
 
-        long latitude =  Double.valueOf(Double.parseDouble(fakeLatitude)).longValue();
+        long latitude = Double.valueOf(Double.parseDouble(fakeLatitude)).longValue();
         long longitude = Double.valueOf(Double.parseDouble(fakeLongitude)).longValue();
+
         Location location = Location.builder()
                 .latitude(latitude)
                 .longitude(longitude)
                 .build();
 
-        //first device
-        pushData(location,temperature,timestamp,firstDevice);
-
-        //second device
-        pushData(location,temperature,timestamp,secondDevice);
-
-        //third device
-        pushData(location,temperature,timestamp,thirdDevice);
-    }
-
-    public void pushData(Location location, int temperature, long timestamp, UUID deviceId) throws JsonProcessingException {
-        IotData deviceT = IotData.builder()
+        return IotData.builder()
                 .location(location)
                 .temperature(temperature)
                 .time(timestamp)
                 .deviceId(deviceId).build();
 
-        // push to kafka
-        String dataObject = mapper.writeValueAsString(DeviceData.builder().data(deviceT).build());
-        dataProducer.sendMessage(dataObject);
     }
 }
