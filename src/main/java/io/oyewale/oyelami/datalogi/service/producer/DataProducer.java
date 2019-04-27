@@ -1,4 +1,4 @@
-package io.oyewale.oyelami.datalogi.service;
+package io.oyewale.oyelami.datalogi.service.producer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

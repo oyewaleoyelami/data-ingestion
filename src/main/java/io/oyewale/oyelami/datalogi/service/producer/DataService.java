@@ -1,4 +1,4 @@
-package io.oyewale.oyelami.datalogi.service;
+package io.oyewale.oyelami.datalogi.service.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
