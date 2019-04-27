@@ -1,17 +1,14 @@
-package com.ultra.tendency.taskone.entity;
+package io.oyewale.oyelami.datalogi.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
-public class Location {
-
-    long latitude;
-
-    long longitude;
+@NoArgsConstructor
+public class DeviceData {
+    private IotData data;
 }

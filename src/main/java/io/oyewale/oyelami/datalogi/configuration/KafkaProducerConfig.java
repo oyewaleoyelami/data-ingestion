@@ -1,4 +1,4 @@
-package com.ultra.tendency.taskone.configuration;
+package io.oyewale.oyelami.datalogi.configuration;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

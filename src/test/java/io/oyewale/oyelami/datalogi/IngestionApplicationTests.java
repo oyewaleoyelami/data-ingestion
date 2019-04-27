@@ -1,4 +1,4 @@
-package com.ultra.tendency.taskone;
+package io.oyewale.oyelami.datalogi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TaskoneApplicationTests {
+public class IngestionApplicationTests {
 
 	@Test
 	public void contextLoads() {

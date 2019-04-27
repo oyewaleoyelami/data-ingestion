@@ -8,11 +8,11 @@
 		<version>2.1.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ultra.tendency</groupId>
-	<artifactId>taskone</artifactId>
+	<groupId>io.oyewale.oyelami</groupId>
+	<artifactId>datalogi</artifactId>
 	<version>0.0.1</version>
-	<name>taskone</name>
-	<description>Test Task For UltraTendency</description>
+	<name>datalogi</name>
+	<description>A data logistics (ingestion) sample application</description>
 
 	<properties>
 		<java.version>1.8</java.version>

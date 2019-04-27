@@ -1,4 +1,4 @@
-package com.ultra.tendency.taskone.entity;
+package io.oyewale.oyelami.datalogi.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,13 +13,17 @@ import java.util.UUID;
 @Builder
 public class IotData {
 
-    UUID  deviceId;
+    private UUID deviceId;
 
-    int temperature;
+    private int temperature;
 
-    Location location;
+    private double humidity;
 
-    long time;
+    private double precipitation;
+
+    private Location location;
+
+    private long time;
 
 
 }

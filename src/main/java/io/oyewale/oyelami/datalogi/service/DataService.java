@@ -1,11 +1,11 @@
-package com.ultra.tendency.taskone.service;
+package io.oyewale.oyelami.datalogi.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import com.ultra.tendency.taskone.entity.DeviceData;
-import com.ultra.tendency.taskone.entity.IotData;
-import com.ultra.tendency.taskone.entity.Location;
+import io.oyewale.oyelami.datalogi.entity.DeviceData;
+import io.oyewale.oyelami.datalogi.entity.IotData;
+import io.oyewale.oyelami.datalogi.entity.Location;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +19,17 @@ public class DataService {
 
     private final DataProducer dataProducer;
 
-    //simulated ID for the three devices.
+    //simulated ID for the five different devices.
 
     UUID firstDevice = UUID.randomUUID();
 
     UUID secondDevice = UUID.randomUUID();
 
     UUID thirdDevice = UUID.randomUUID();
+
+    UUID fourthDevice = UUID.randomUUID();
+
+    UUID fifthDevice = UUID.randomUUID();
 
 
     public DataService(DataProducer dataProducer, ObjectMapper mapper){
@@ -45,6 +49,12 @@ public class DataService {
 
         //third device
         pushData(generateSimulatedData(timestamp, thirdDevice));
+
+        //third device
+        pushData(generateSimulatedData(timestamp, fourthDevice));
+
+        //third device
+        pushData(generateSimulatedData(timestamp, fifthDevice));
     }
 
     // push to kafka
@@ -54,11 +64,14 @@ public class DataService {
     }
 
     private IotData generateSimulatedData(long timestamp, UUID deviceId) {
-        //using the faker library to generate simulated data for the three devices
+        //using the faker library to generate simulated data for the five devices
         Faker faker = new Faker();
         int temperature = faker.number().numberBetween(0, 100);
         String fakeLongitude = faker.address().longitude();
         String fakeLatitude = faker.address().latitude();
+
+        double fakeHumidity = faker.number().randomDouble(2, 12, 100);
+        double fakePrecipitation = faker.number().randomDouble(1, 10, 100);
 
         long latitude = Double.valueOf(Double.parseDouble(fakeLatitude)).longValue();
         long longitude = Double.valueOf(Double.parseDouble(fakeLongitude)).longValue();
@@ -72,6 +85,8 @@ public class DataService {
                 .location(location)
                 .temperature(temperature)
                 .time(timestamp)
+                .humidity(fakeHumidity)
+                .precipitation(fakePrecipitation)
                 .deviceId(deviceId).build();
 
     }

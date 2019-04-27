@@ -1,4 +1,4 @@
-package com.ultra.tendency.taskone.service;
+package io.oyewale.oyelami.datalogi.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,5 @@ public class DataProducer {
         logger.info("pushing device data  {}  to the topic  {}", deviceData, KAFKA_TOPIC);
         this.kafkaTemplate.send(KAFKA_TOPIC, deviceData);
     }
-
 
 }
