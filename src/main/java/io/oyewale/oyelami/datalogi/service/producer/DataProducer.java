@@ -3,6 +3,7 @@ package io.oyewale.oyelami.datalogi.service.producer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.KafkaException;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,11 @@ public class DataProducer {
 
     public void sendMessage(String deviceData) {
         logger.info("pushing device data  {}  to the topic  {}", deviceData, KAFKA_TOPIC);
-        this.kafkaTemplate.send(KAFKA_TOPIC, deviceData);
+        try {
+            this.kafkaTemplate.send(KAFKA_TOPIC, deviceData);
+        } catch (KafkaException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -40,7 +40,6 @@ public class SparkJob implements Serializable {
 
         HashMap kafkaProperties = new HashMap();
         kafkaProperties.put("bootstrap.servers", "localhost:9092");
-        kafkaProperties.put("group.id", "group-id");
         kafkaProperties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         kafkaProperties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
